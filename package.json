@@ -1,6 +1,6 @@
 {
     "name": "array-shorthands",
-    "version": "0.0.0",
+    "version": "0.0.1",
     "description": "Functional syntax for common array tasks.",
     "main": "dist/index.js",
     "scripts": {
