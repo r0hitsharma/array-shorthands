@@ -1,0 +1,31 @@
+{
+    "name": "array-shorthands",
+    "version": "0.0.0",
+    "description": "Functional syntax for common array tasks.",
+    "main": "dist/index.js",
+    "scripts": {
+        "pretest": "npm run build",
+        "test": "ava",
+        "prestart": "npm run build",
+        "start": "node dist/index.js",
+        "build": "babel src/ -d dist/ --source-maps",
+        "watch": "babel -w src/ -d dist/ --source-maps"
+    },
+    "repository": {
+        "type": "git",
+        "url": "github.com:r0hitsharma/array-shorthands.git"
+    },
+    "keywords": [
+        "javascript",
+        "array",
+        "nodejs",
+        "js"
+    ],
+    "author": "r0hitsharma",
+    "license": "ISC",
+    "devDependencies": {
+        "ava": "^0.25.0",
+        "babel-cli": "6.26.0",
+        "babel-preset-env": "1.6.1"
+    }
+}
