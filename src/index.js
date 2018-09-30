@@ -1,15 +1,15 @@
-function Shorthand(sel) {
-    if(!sel)
-        return this
+function Shorthand(arr, expr) {
+    if(!expr)
+        return arr
     
     // fn filter shorthand
-    if(typeof sel == "function")
-        return this.filter(sel)
+    if(typeof expr == "function")
+        return arr.filter(expr)
 
     // key=val filter shorthand 
-    if(sel.includes("=")){
-        let [key, val] = sel.split("=")
-        return this.filter(x => x[key] == val)
+    if(expr.includes("=")){
+        let [key, val] = expr.split("=")
+        return arr.filter(x => x[key] == val)
     }
 }
 
@@ -29,7 +29,7 @@ class ArrayShorthand extends Function {
                 }
             },
             apply: (target, thisArg, args) => {
-                return Shorthand.bind(this._inner)(...args)
+                return Shorthand(this._inner, ...args)
             }
         })
     }
