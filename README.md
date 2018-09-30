@@ -12,10 +12,15 @@ ArrayShorthands provides methods for filtering on arrays using direct invocation
 import { Ash } from "array-shorthands"
 
 // intialization takes same parameters as an array
-let arr = new Ash({ a:1, b:2 }, { a:2, b:3 }, { a:3, b: 4})
+let arr = new Ash({ a:1, b:2 }, { a:2, b:3 }, { a:3, b: 4}, { a:1, b:3 })
 
-// filter by parameter
+// filter by parameter, as key=val
 arr("a=2") // returns [{ a:2, b:3 }]
 
-// filter through function
+// filter through fn directly
 arr(a => a.b % 2 == 0) // returns [{ a:1, b:2 }, { a:3, b: 4}]
+
+// chain filters with , operator
+arr("a=1,b=3") // returns [{ a:1, b:3 }]
+arr("a=3,b=3") // returns []
+```

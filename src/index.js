@@ -6,6 +6,14 @@ function Shorthand(arr, expr) {
     if(typeof expr == "function")
         return arr.filter(expr)
 
+    // , for and conditions
+    if(expr.includes(",")){
+        expr.split(",").forEach(subExpr => {
+            arr = Shorthand(arr, subExpr)
+        })
+        return arr
+    }
+
     // key=val filter shorthand 
     if(expr.includes("=")){
         let [key, val] = expr.split("=")
