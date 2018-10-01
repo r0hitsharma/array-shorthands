@@ -20,6 +20,11 @@ test(", operator", t => {
     t.deepEqual(arr("a=3,b=3"), [])
 })
 
-test.skip("| operator", t => {
-    t.deepEqual(arr("a=1|b=3"), [{ a:1, b:2 }, { a:2, b:3 }])
+test("; operator", t => {
+    t.deepEqual(arr("a=1;b=3"), [{ a:1, b:2 }, { a:2, b:3 }, { a:1, b:3 }])
+})
+
+test(", and ; operators", t => {
+    t.deepEqual(arr("b=2;b=3,a=1"), [{ a:1, b:2 }, { a:1, b:3 }])
+    t.deepEqual(arr("a=1;a=2,b=2;b=3"), [{ a:1, b:2 }, { a:2, b:3 }, { a:1, b:3 }])
 })

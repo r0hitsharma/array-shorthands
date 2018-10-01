@@ -2,9 +2,11 @@ function Shorthand(expr) {
     // console.log(`=>${expr}`)
 
     // , for and conditions
-    if(expr.includes(",")){
+    if(expr.includes(","))
         return expr.split(",").map(Shorthand).join(" && ")
-    }
+
+    if(expr.includes(";"))
+        return expr.split(";").map(Shorthand).join(" || ")
 
     // key=val filter shorthand 
     if(expr.includes("=")){

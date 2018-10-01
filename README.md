@@ -20,7 +20,11 @@ arr("a=2") // returns [{ a:2, b:3 }]
 // filter through fn directly
 arr(a => a.b % 2 == 0) // returns [{ a:1, b:2 }, { a:3, b: 4}]
 
-// chain filters with , operator
+// "and" chain filters with , operator
 arr("a=1,b=3") // returns [{ a:1, b:3 }]
 arr("a=3,b=3") // returns []
+
+// "or" chain filters with ; operator
+arr("b=2;b=3,a=1") // returns [{ a:1, b:2 }, { a:1, b:3 }]
+arr("a=1;a=2,b=2;b=3") //returns [{ a:1, b:2 }, { a:2, b:3 }, { a:1, b:3 }]
 ```
