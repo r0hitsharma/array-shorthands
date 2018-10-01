@@ -3,31 +3,24 @@
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-function Shorthand(arr, expr) {
-    if (!expr) return arr;
-
-    // fn filter shorthand
-    if (typeof expr == "function") return arr.filter(expr);
+function Shorthand(expr) {
+    // console.log(`=>${expr}`)
 
     // , for and conditions
     if (expr.includes(",")) {
-        expr.split(",").forEach(subExpr => {
-            arr = Shorthand(arr, subExpr);
-        });
-        return arr;
+        return expr.split(",").map(Shorthand).join(" && ");
     }
 
     // key=val filter shorthand 
     if (expr.includes("=")) {
         let [key, val] = expr.split("=");
-        return arr.filter(x => x[key] == val);
+        return `x["${key}"] == ${val}`;
     }
 }
 
 class ArrayShorthand extends Function {
     constructor(...arr) {
         super();
-        this._inner = [...arr];
 
         return new Proxy(this, {
             get: (target, prop) => {
@@ -37,7 +30,14 @@ class ArrayShorthand extends Function {
                 }
             },
             apply: (target, thisArg, args) => {
-                return Shorthand(this._inner, ...args);
+                // return Shorthand(this._inner, ...args)
+                let [expr] = args;
+                if (!expr) return arr;
+
+                // fn filter shorthand
+                if (typeof expr == "function") return arr.filter(expr);
+
+                return arr.filter(new Function("x", `return ${Shorthand(expr)}`));
             }
         });
     }
